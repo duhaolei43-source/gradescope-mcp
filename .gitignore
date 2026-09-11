@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+*.log
+coverage/
+.env*
+.mcp.json
+session*
+storage-state*
+*.sqlite*
+*.db*
+*.pdf
+*.png
+*.zip
+private/

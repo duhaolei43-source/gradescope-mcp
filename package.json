@@ -1,0 +1,22 @@
+{
+  "name": "gradescope-personal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal local Gradescope archive and Codex MCP integration",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "sync": "node src/cli.mjs sync",
+    "connect": "node src/cli.mjs connect",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "cheerio": "1.2.0",
+    "playwright": "1.63.0",
+    "zod": "4.6.1"
+  }
+}

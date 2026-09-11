@@ -1,0 +1,27 @@
+{
+  "name": "gradescope-personal",
+  "version": "0.1.0",
+  "description": "Read and synchronize Gradescope assignments, PDFs, submissions, released grades and detailed feedback across local Codex projects.",
+  "author": {
+    "name": "Gradescop contributors"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Gradescop",
+    "shortDescription": "Assignments, PDFs, grades and feedback",
+    "longDescription": "Read and synchronize Gradescope assignments, PDFs, submissions, released grades and detailed feedback across local Codex projects.",
+    "developerName": "Gradescop contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Read"
+    ],
+    "defaultPrompt": [
+      "Use Gradescop to check what is due.",
+      "Read all feedback on my latest graded assignment.",
+      "Refresh my Gradescope archive."
+    ],
+    "composerIcon": "./assets/icon.svg",
+    "brandColor": "#D85C32"
+  },
+  "mcpServers": "./.mcp.json"
+}
