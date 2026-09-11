@@ -1,12 +1,12 @@
-# Gradescop
+# Gradescope MCP for Codex — Gradescop
 
 ![Gradescop: Your coursework, connected.](assets/banner.svg)
 
-[![Tests](https://github.com/duhaolei43-source/Gradescope/actions/workflows/test.yml/badge.svg)](https://github.com/duhaolei43-source/Gradescope/actions/workflows/test.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-D85C32.svg)](LICENSE) [![Platform: macOS preview](https://img.shields.io/badge/platform-macOS_preview-25364B.svg)](ROADMAP.md)
+[![Tests](https://github.com/duhaolei43-source/gradescope-mcp/actions/workflows/test.yml/badge.svg)](https://github.com/duhaolei43-source/gradescope-mcp/actions/workflows/test.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-D85C32.svg)](LICENSE) [![Platform: macOS preview](https://img.shields.io/badge/platform-macOS_preview-25364B.svg)](ROADMAP.md)
 
 [Get started](#quick-start) · [Architecture](#how-it-works) · [Roadmap](ROADMAP.md) · [Test coverage](docs/TESTING.md) · [Contribute](CONTRIBUTING.md)
 
-A local, read-only Gradescope MCP server and Codex plugin for students. Archive assignments, deadlines, original and graded PDFs, released rubric feedback, comments, annotations, and accessible submission history across courses.
+**Gradescop is a local, read-only Gradescope MCP (Model Context Protocol) server and Codex plugin for students.** Archive assignments, deadlines, original and graded PDFs, released rubric feedback, comments, annotations, and accessible submission history across courses.
 
 **Preview release: macOS only.** Independent project; not affiliated with Gradescope, Turnitin, or OpenAI. Each user signs in to their own account. This repository contains code and synthetic tests, not account data.
 
@@ -15,7 +15,7 @@ A local, read-only Gradescope MCP server and Codex plugin for students. Archive 
 Requires macOS, Node.js 22.13 or newer, Google Chrome, and Poppler (`pdftotext` and `pdftoppm` on PATH). Optional OCR requires Tesseract. With Homebrew, install these using `brew install node poppler` and optionally `brew install tesseract`; install Google Chrome separately.
 
 ```sh
-git clone https://github.com/duhaolei43-source/Gradescope.git gradescope-personal
+git clone https://github.com/duhaolei43-source/gradescope-mcp.git gradescope-personal
 cd gradescope-personal
 npm ci
 node scripts/configure.mjs

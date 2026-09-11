@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Local student Gradescope reader for Codex and STDIO MCP clients",
+  "description": "Gradescope MCP server and Codex plugin for student assignments, PDFs, grades and rubric feedback",
   "engines": {
     "node": ">=22.13.0"
   },
@@ -23,10 +23,20 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/duhaolei43-source/Gradescope.git"
+    "url": "git+https://github.com/duhaolei43-source/gradescope-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/duhaolei43-source/Gradescope/issues"
+    "url": "https://github.com/duhaolei43-source/gradescope-mcp/issues"
   },
-  "homepage": "https://github.com/duhaolei43-source/Gradescope#readme"
+  "homepage": "https://github.com/duhaolei43-source/gradescope-mcp#readme",
+  "keywords": [
+    "gradescope",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "codex",
+    "codex-plugin",
+    "assignments",
+    "education"
+  ]
 }
