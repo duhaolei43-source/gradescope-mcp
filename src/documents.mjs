@@ -24,6 +24,7 @@ export async function download(context,item,assignment) {
     }
     if(!r.ok())throw Error(`DOWNLOAD_HTTP_${r.status()}`);
     if(!allowedFile(r.url()))throw Error('DOWNLOAD_REDIRECT_NOT_ALLOWED');
+    if(Number(r.headers()['content-length'])>100*1024*1024)throw Error('DOCUMENT_EXCEEDS_100MB');
     const buffer=await r.body();
     if(buffer.length>100*1024*1024)throw Error('DOCUMENT_EXCEEDS_100MB');
     const isPdf=buffer.subarray(0,5).toString()==='%PDF-';

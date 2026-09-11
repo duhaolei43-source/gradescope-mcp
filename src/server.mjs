@@ -33,8 +33,8 @@ tool('sync','Refresh Gradescope course listings, attachments, submissions, visib
 tool('sync_status','Read a background synchronization job. Report partial failures and missing coverage explicitly.',{job_id:id},a=>jobStatus(a.job_id));
 tool('list_courses','List all discovered courses across terms. Includes discovery counts, access restrictions and verification time.',pageArgs,a=>paginate(all('course'),a));
 tool('list_assignments','List assignment status, scores and effective visible deadlines. Time remaining is calculated now; fetched_at shows source freshness. Paginate to retrieve all.',{...pageArgs,course_id:id.optional(),query:z.string().optional(),due_before:z.string().datetime().optional(),due_after:z.string().datetime().optional(),status:z.enum(['all','not_submitted','submitted','graded']).default('all')},a=>{
-  let rows=all('assignment',a.course_id);if(a.query)rows=rows.filter(x=>x.title.toLowerCase().includes(a.query.toLowerCase()));if(a.due_before)rows=rows.filter(x=>x.due_at&&x.due_at<=a.due_before);
-  if(a.due_after)rows=rows.filter(x=>x.due_at&&x.due_at>=a.due_after);
+  let rows=all('assignment',a.course_id);if(a.query)rows=rows.filter(x=>x.title.toLowerCase().includes(a.query.toLowerCase()));if(a.due_before)rows=rows.filter(x=>x.due_at&&Date.parse(x.due_at)<=Date.parse(a.due_before));
+  if(a.due_after)rows=rows.filter(x=>x.due_at&&Date.parse(x.due_at)>=Date.parse(a.due_after));
   if(a.status==='not_submitted')rows=rows.filter(x=>/no submission/i.test(x.submission_status));
   if(a.status==='submitted')rows=rows.filter(x=>/^submitted$/i.test(x.submission_status));
   if(a.status==='graded')rows=rows.filter(x=>x.submission_status==='graded');

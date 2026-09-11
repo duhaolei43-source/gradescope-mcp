@@ -32,9 +32,9 @@ export function loadSession() {
   } catch { throw new Error('AUTHENTICATION_REQUIRED'); }
 }
 export async function openBrowser({interactive=false}={}) {
-  const browser=await chromium.launch({channel:'chrome',headless:!interactive});
   let state;
-  try {state=loadSession();} catch(e) {if(!interactive){await browser.close();throw e;}}
+  try {state=loadSession();} catch(e) {if(!interactive)throw e;}
+  const browser=await chromium.launch({channel:'chrome',headless:!interactive});
   const context=await browser.newContext({storageState:state,acceptDownloads:true});
   context.setDefaultTimeout(12000);
   return {browser,context};

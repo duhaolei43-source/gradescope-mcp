@@ -1,5 +1,11 @@
 # Gradescop
 
+![Gradescop: Your coursework, connected.](assets/banner.svg)
+
+[![Tests](https://github.com/duhaolei43-source/Gradescope/actions/workflows/test.yml/badge.svg)](https://github.com/duhaolei43-source/Gradescope/actions/workflows/test.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-D85C32.svg)](LICENSE) [![Platform: macOS preview](https://img.shields.io/badge/platform-macOS_preview-25364B.svg)](ROADMAP.md)
+
+[Get started](#quick-start) · [Architecture](#how-it-works) · [Roadmap](ROADMAP.md) · [Test coverage](docs/TESTING.md) · [Contribute](CONTRIBUTING.md)
+
 A local, read-only Gradescope MCP server and Codex plugin for students. Archive assignments, deadlines, original and graded PDFs, released rubric feedback, comments, annotations, and accessible submission history across courses.
 
 **Preview release: macOS only.** Independent project; not affiliated with Gradescope, Turnitin, or OpenAI. Each user signs in to their own account. This repository contains code and synthetic tests, not account data.
@@ -51,3 +57,30 @@ The archive is in `~/Library/Application Support/GradescopePersonal`, outside th
 The adapter reads account-visible student pages and embedded viewer data. It never submits work, starts assessments, activates attempts, edits answers, or sends regrade requests. Reads may record a view on Gradescope. Hidden grades, unopened timed content, unavailable templates, and unapproved external file hosts cannot be promised. Layout changes can break extraction. Support is currently limited to www.gradescope.com and observed upload hosts.
 
 See [public plan](ROADMAP.md), [approach comparison](docs/APPROACHES.md), [security guidance](SECURITY.md), and [contributing](CONTRIBUTING.md).
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[Your Gradescope account] -->|Interactive sign-in| B[Chrome session]
+    B --> C[Student page reader]
+    C --> D[(Local archive)]
+    D --> E[12 MCP tools]
+    E --> F[Codex conversation]
+    K[macOS Keychain] -. protects session .-> B
+    C --> G[Coverage and change checks]
+    G --> D
+```
+
+| You ask | Gradescop retrieves |
+| --- | --- |
+| What is due? | Assignment status and timezone-aware deadlines |
+| Why did I lose points? | Released rubric items, scoring direction, comments and annotations |
+| Show the original work | Preserved PDF files and page-level text |
+| What changed? | Changes since the previous sync, with explicit retrieval failures |
+
+## Quality and licensing
+
+Run `npm run smoke` after installing Poppler. Tests use synthetic records and a generated PDF, isolated temporary archives and local MCP processes. No login or private coursework is needed. See [the test matrix and limits](docs/TESTING.md).
+
+Released under the [MIT license](LICENSE). Dependency licenses remain their respective authors' property. Gradescope and Codex names identify compatible products; this project is independent.
