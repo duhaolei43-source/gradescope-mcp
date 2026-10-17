@@ -12,7 +12,9 @@
     "sync": "node src/cli.mjs sync",
     "connect": "node src/cli.mjs connect",
     "test": "node --test test/*.test.mjs",
-    "smoke": "node --test test/*.test.mjs"
+    "smoke": "node --test test/*.test.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "package:skill": "python3 scripts/package_skill.py"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "2.0.0",
