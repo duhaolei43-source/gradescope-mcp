@@ -17,3 +17,11 @@ jobs:
       - run: brew install poppler
       - run: npm ci
       - run: npm run smoke
+      - run: python3 scripts/test_package.py
+      - run: npm run package:skill
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gradescope-study-companion-node-${{ matrix.node }}
+          path: |
+            dist/gradescope-study-companion.zip
+            dist/gradescope-study-companion.zip.sha256

@@ -12,3 +12,5 @@ storage-state*
 *.png
 *.zip
 private/
+dist/
+__pycache__/

@@ -4,6 +4,7 @@ import {openBrowser,saveSession} from './auth.mjs';
 import {ROOT,now,hash,db,all,get,put,setting,atomic,acquireLock} from './storage.mjs';
 import {BASE,parseCourses,parseAssignments,components,collectFiles,safeUrl,scrub,htmlText} from './parsers.mjs';
 import {download} from './documents.mjs';
+import {completeCoverage,materialFailures} from './coverage.mjs';
 
 export function jobFile(id){if(!/^[a-zA-Z0-9-]+$/.test(id))throw Error('INVALID_JOB_ID');return path.join(ROOT,'jobs',id+'.json');}
 export function jobStatus(id){try{return JSON.parse(fs.readFileSync(jobFile(id),'utf8'));}catch{return {id,status:'not_found'};}}
@@ -134,6 +135,7 @@ export async function sync({course_id,assignment_id,job_id=`sync-${Date.now()}`}
           }catch(e){entry.coverage.submission='failed';state.failures.push({assignment_id:entry.id,error:errorCode(e)});}
         }else {entry.coverage.submission='no_submission';entry.coverage.feedback='not_applicable';}
         entry.coverage.materials=entry.attachments.some(d=>d.status!=='downloaded')?'partial':entry.attachments.length?'downloaded':'no_template_exposed_on_dashboard';
+        state.failures.push(...materialFailures(entry));
         state.documents+=entry.attachments.filter(d=>d.status==='downloaded').length;
         state.changes+=put('assignment',entry.id,entry)?1:0;state.assignments++;
       }
@@ -142,7 +144,7 @@ export async function sync({course_id,assignment_id,job_id=`sync-${Date.now()}`}
     state.documents=all('document').filter(d=>(!course_id||d.course_id===String(course_id))&&(!assignment_id||d.assignment_id===String(assignment_id))).length;
     state.changes=db.prepare('SELECT COUNT(*) AS n FROM changes WHERE at>=?').get(state.started_at).n;
     delete state.current_assignment;delete state.current_course;
-    state.status=state.failures.length?'partial':'complete';state.finished_at=now();
+    state.status=completeCoverage(state,{course_id,assignment_id});state.finished_at=now();
     setting('last_sync',state);
     if(!course_id&&!assignment_id)setting('last_full_sync',state);
   }catch(e){state.status='failed';state.error=errorCode(e);state.finished_at=now();if(state.error==='AUTHENTICATION_REQUIRED')setting('connection',{status:'authentication_required',checked_at:now()});}

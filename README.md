@@ -10,6 +10,12 @@
 
 **Preview release: macOS only.** Independent project; not affiliated with Gradescope, Turnitin, or OpenAI. Each user signs in to their own account. This repository contains code and synthetic tests, not account data.
 
+## Portable skill package (Agensi preparation)
+
+[Gradescope Study Companion](marketplace/gradescope-study-companion/SKILL.md) adds deadline briefs, evidence-based feedback explanations, and change digests over the same 12-tool MCP server. It includes setup/recovery guidance, privacy disclosures and a synthetic worked example. Live access still requires the macOS runtime and your interactive login.
+
+Run `npm run doctor` for local prerequisites. Build the deterministic upload ZIP with `npm run package:skill` (Python 3 required for the build only). It contains root-level SKILL.md, references, examples, MIT license, runtime source, pinned dependency lockfile and synthetic tests. Dependencies are installed after extraction with `npm ci`; private archives and machine-specific configuration are excluded. See [release plan and status](docs/release/PLAN.md) and [listing copy](docs/release/LISTING.md). No marketplace submission or approval is implied.
+
 ## Quick start
 
 Requires macOS, Node.js 22.13 or newer, Google Chrome, and Poppler (`pdftotext` and `pdftoppm` on PATH). Optional OCR requires Tesseract. With Homebrew, install these using `brew install node poppler` and optionally `brew install tesseract`; install Google Chrome separately.
